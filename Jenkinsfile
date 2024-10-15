@@ -49,7 +49,7 @@ pipeline {
                                 }\
                             ]\
                         }'
-                    def response - httpRequest (
+                    def response = httpRequest (
                         httpMode: 'POST',
                         url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
                         contentType: 'APPLICATION_JSON',
