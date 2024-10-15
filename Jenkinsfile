@@ -28,26 +28,26 @@ pipeline {
                 sh 'source venv/bin/activate && python -m unittest discover'
                 // importTestResultsToJira()
                 script{
-                    def req_payload = '{ "testExecutionKey": "XRAYT-3",
-                            "info" : {
-                                "summary" : "Execution of automated tests for release v1.3",
-                                "description" : "test execution",
-                                "user" : "admin",
-                                "revision" : "1.0.42134",
-                                "startDate" : "2014-08-30T11:47:35+01:00",
-                                "finishDate" : "2014-08-30T11:53:00+01:00",
-                                "testPlanKey" : "XRAYT-1",
-                                "testEnvironments": ["local"]
-                            },
-                            "tests" : [
+                    def req_payload = '{ "testExecutionKey": "XRAYT-3",\
+                            "info" : {\
+                                "summary" : "Execution of automated tests for release v1.3",\
+                                "description" : "test execution",\
+                                "user" : "admin",\
+                                "revision" : "1.0.42134",\
+                                "startDate" : "2014-08-30T11:47:35+01:00",\
+                                "finishDate" : "2014-08-30T11:53:00+01:00",\
+                                "testPlanKey" : "XRAYT-1",\
+                                "testEnvironments": ["local"]\
+                            },\
+                            "tests" : [\
                                 {
-                                    "testKey" : "XRAYT-2",
-                                    "start" : "2024-08-30T11:47:35+01:00",
-                                    "finish" : "2024-08-30T11:50:56+01:00",
-                                    "comment" : "Successful execution",
-                                    "status" : "PASS"
-                                }
-                            ]
+                                    "testKey" : "XRAYT-2",\
+                                    "start" : "2024-08-30T11:47:35+01:00",\
+                                    "finish" : "2024-08-30T11:50:56+01:00",\
+                                    "comment" : "Successful execution",\
+                                    "status" : "PASS"\
+                                }\
+                            ]\
                         }'
                     def response - httpRequest (
                         httpMode: 'POST',
