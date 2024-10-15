@@ -28,7 +28,7 @@ pipeline {
                 sh 'source venv/bin/activate && python -m unittest discover'
                 // importTestResultsToJira()
                 script{
-                    req_payload = '{ "testExecutionKey": "XRAYT-3",\
+                    req_payload = '{ "testExecutionKey": "XRAYT-5",\
                             "info" : {\
                                 "summary" : "Execution of automated tests for release v1.3",\
                                 "description" : "test execution",\
