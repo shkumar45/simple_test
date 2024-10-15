@@ -28,7 +28,7 @@ pipeline {
                 sh 'source venv/bin/activate && python -m unittest discover'
                 // importTestResultsToJira()
                 script{
-                    def req_payload = '{ "testExecutionKey": "XRAYT-3",\
+                    req_payload = '{ "testExecutionKey": "XRAYT-3",\
                             "info" : {\
                                 "summary" : "Execution of automated tests for release v1.3",\
                                 "description" : "test execution",\
@@ -49,7 +49,7 @@ pipeline {
                                 }\
                             ]\
                         }'
-                    def response = httpRequest (
+                    response = httpRequest(
                         httpMode: 'POST',
                         url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
                         contentType: 'APPLICATION_JSON',
