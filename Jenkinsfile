@@ -40,7 +40,7 @@ pipeline {
                                 "testEnvironments": ["local"]\
                             },\
                             "tests" : [\
-                                {
+                                {\
                                     "testKey" : "XRAYT-2",\
                                     "start" : "2024-08-30T11:47:35+01:00",\
                                     "finish" : "2024-08-30T11:50:56+01:00",\
