@@ -45,20 +45,18 @@ pipeline {
                             ]\
                         }'
                     JIRA_TOKEN = credentials('JIRA_TOKEN')
-                    try{
-                        response = httpRequest(
-                            httpMode: 'POST',
-                            url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
-                            // acceptType: 'APPLICATION_JSON',
-                            contentType: 'APPLICATION_JSON',
-                            requestBody: req_payload,
-                            customHeaders: [
-                                    /* groovylint-disable-next-line LineLength */
-                                    [$class: 'StringParameterValue', name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
-                                    [$class: 'StringParameterValue', name: 'Content-Type', value: 'application/json']
-                                ]
-                        )
-                    }
+                    response = httpRequest(
+                        httpMode: 'POST',
+                        url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
+                        // acceptType: 'APPLICATION_JSON',
+                        contentType: 'APPLICATION_JSON',
+                        requestBody: req_payload,
+                        customHeaders: [
+                                /* groovylint-disable-next-line LineLength */
+                                [$class: 'StringParameterValue', name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
+                                [$class: 'StringParameterValue', name: 'Content-Type', value: 'application/json']
+                            ]
+                    )
                     echo "Status: ${response.status}"
                     echo "Response: ${response.content}"
                 }
