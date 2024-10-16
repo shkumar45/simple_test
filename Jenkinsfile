@@ -45,7 +45,9 @@ pipeline {
                             ]\
                         }'
                     JIRA_TOKEN = credentials('JIRA_TOKEN')
+                    echo "jira token --->"
                     echo ${JIRA_TOKEN}
+                    echo "jira token <---"
                     response = httpRequest(
                         httpMode: 'POST',
                         url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
