@@ -28,47 +28,46 @@ pipeline {
                 sh 'source venv/bin/activate && python -m unittest discover'
                 // importTestResultsToJira()
                 script {
-                    // req_payload = '{ "testExecutionKey": "XRAYT-5",\
-                    //         "info" : {\
-                    //             "summary" : "Execution of automated tests for release v1.3",\
-                    //             "description" : "test execution",\
-                    //             "user" : "admin",\
-                    //             "revision" : "1.0.42134",\
-                    //             "startDate" : "2014-08-30T11:47:35+01:00",\
-                    //             "finishDate" : "2014-08-30T11:53:00+01:00",\
-                    //             "testPlanKey" : "XRAYT-1",\
-                    //             "testEnvironments": ["local"]\
-                    //         },\
-                    //         "tests" : [\
-                    //             {\
-                    //                 "testKey" : "XRAYT-2",\
-                    //                 "start" : "2024-08-30T11:47:35+01:00",\
-                    //                 "finish" : "2024-08-30T11:50:56+01:00",\
-                    //                 "comment" : "Successful execution",\
-                    //                 "status" : "PASS"\
-                    //             }\
-                    //         ]\
-                    //     }'
-                    // echo 'jira token ---> '
-                    /* groovylint-disable-next-line NestedBlockDepth */
-                    node {
-                        echo "${JIRA_TOKEN}"
-                        // echo req_payload
-                        // response = httpRequest(
-                        //     httpMode: 'POST',
-                        //     url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
-                        //     // acceptType: 'APPLICATION_JSON',
-                        //     contentType: 'APPLICATION_JSON',
-                        //     requestBody: req_payload,
-                        //     customHeaders: [
-                        //             /* groovylint-disable-next-line LineLength */
-                        //             [maskValue: false, name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
-                        //             [maskValue: false, name: 'Content-Type', value: 'application/json']
-                        //         ]
-                        // )
-                        // echo "Status: ${response.status}"
-                        // echo "Response: ${response.content}"
-                    }
+                    req_payload = '{ "testExecutionKey": "XRAYT-5",\
+                            "info" : {\
+                                "summary" : "Execution of automated tests for release v1.3",\
+                                "description" : "test execution",\
+                                "user" : "admin",\
+                                "revision" : "1.0.42134",\
+                                "startDate" : "2014-08-30T11:47:35+01:00",\
+                                "finishDate" : "2014-08-30T11:53:00+01:00",\
+                                "testPlanKey" : "XRAYT-1",\
+                                "testEnvironments": ["local"]\
+                            },\
+                            "tests" : [\
+                                {\
+                                    "testKey" : "XRAYT-2",\
+                                    "start" : "2024-08-30T11:47:35+01:00",\
+                                    "finish" : "2024-08-30T11:50:56+01:00",\
+                                    "comment" : "Successful execution",\
+                                    "status" : "PASS"\
+                                }\
+                            ]\
+                        }'
+
+                    //node {
+                        //echo "${JIRA_TOKEN}"
+                    //}
+                    //echo req_payload
+                    response = httpRequest(
+                        httpMode: 'POST',
+                        url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
+                        // acceptType: 'APPLICATION_JSON',
+                        contentType: 'APPLICATION_JSON',
+                        requestBody: req_payload,
+                        customHeaders: [
+                                /* groovylint-disable-next-line LineLength */
+                                [maskValue: false, name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
+                                [maskValue: false, name: 'Content-Type', value: 'application/json']
+                            ]
+                    )
+                    echo "Status: ${response.status}"
+                    echo "Response: ${response.content}"
                 }
             }
         }
