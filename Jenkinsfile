@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        JIRA_TOKEN = credentials('JIRA-TOKEN')
+        JIRA_TOKEN = credentials('my-secret-id')
     }
 
     stages {
@@ -52,7 +52,7 @@ pipeline {
                     // echo 'jira token ---> '
                     /* groovylint-disable-next-line NestedBlockDepth */
                     node {
-                        echo "${JIRA-TOKEN}"
+                        echo "${JIRA_TOKEN}"
                         // echo req_payload
                         // response = httpRequest(
                         //     httpMode: 'POST',
