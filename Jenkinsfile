@@ -58,8 +58,6 @@ pipeline {
                                     [$class: 'StringParameterValue', name: 'Content-Type', value: 'application/json']
                                 ]
                         )
-                    } catch {
-                        echo 'exeption occured'
                     }
                     echo "Status: ${response.status}"
                     echo "Response: ${response.content}"
