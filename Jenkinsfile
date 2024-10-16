@@ -2,7 +2,7 @@
 pipeline {
     agent any
 
-    environment{
+    environment {
         JIRA_TOKEN = credentials('JIRA_TOKEN')
     }
 
@@ -27,7 +27,7 @@ pipeline {
                 // Run Python unit tests
                 sh 'source venv/bin/activate && python -m unittest discover'
                 // importTestResultsToJira()
-                script{
+                script {
                     req_payload = '{ "testExecutionKey": "XRAYT-5",\
                             "info" : {\
                                 "summary" : "Execution of automated tests for release v1.3",\
@@ -49,8 +49,11 @@ pipeline {
                                 }\
                             ]\
                         }'
-                    echo "jira token ---> "
-                    echo "${JIRA_TOKEN}"
+                    echo 'jira token ---> '
+                    /* groovylint-disable-next-line NestedBlockDepth */
+                    node {
+                        echo "${JIRA_TOKEN}"
+                    }
                     echo req_payload
                     response = httpRequest(
                         httpMode: 'POST',
