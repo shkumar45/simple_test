@@ -53,22 +53,22 @@ pipeline {
                     /* groovylint-disable-next-line NestedBlockDepth */
                     node {
                         echo "${JIRA_TOKEN}"
+                        echo req_payload
+                        response = httpRequest(
+                            httpMode: 'POST',
+                            url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
+                            // acceptType: 'APPLICATION_JSON',
+                            contentType: 'APPLICATION_JSON',
+                            requestBody: req_payload,
+                            customHeaders: [
+                                    /* groovylint-disable-next-line LineLength */
+                                    [maskValue: false, name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
+                                    [maskValue: false, name: 'Content-Type', value: 'application/json']
+                                ]
+                        )
+                        echo "Status: ${response.status}"
+                        echo "Response: ${response.content}"
                     }
-                    echo req_payload
-                    response = httpRequest(
-                        httpMode: 'POST',
-                        url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
-                        // acceptType: 'APPLICATION_JSON',
-                        contentType: 'APPLICATION_JSON',
-                        requestBody: req_payload,
-                        customHeaders: [
-                                /* groovylint-disable-next-line LineLength */
-                                [maskValue: false, name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
-                                [maskValue: false, name: 'Content-Type', value: 'application/json']
-                            ]
-                    )
-                    echo "Status: ${response.status}"
-                    echo "Response: ${response.content}"
                 }
             }
         }
