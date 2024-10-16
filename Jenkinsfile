@@ -53,8 +53,8 @@ pipeline {
                         requestBody: req_payload,
                         customHeaders: [
                                 /* groovylint-disable-next-line LineLength */
-                                [$class: 'StringParameterValue', name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
-                                [$class: 'StringParameterValue', name: 'Content-Type', value: 'application/json']
+                                [maskValue: false, name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
+                                [maskValue: false, name: 'Content-Type', value: 'application/json']
                             ]
                     )
                     echo "Status: ${response.status}"
