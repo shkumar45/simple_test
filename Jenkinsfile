@@ -49,15 +49,17 @@ pipeline {
                         response = httpRequest(
                             httpMode: 'POST',
                             url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
-                            //acceptType: 'APPLICATION_JSON',
+                            // acceptType: 'APPLICATION_JSON',
                             contentType: 'APPLICATION_JSON',
                             requestBody: req_payload,
-                            customHeaders: [[maskValue: false, name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"]]
+                            customHeaders: [
+                                    /* groovylint-disable-next-line LineLength */
+                                    [$class: 'StringParameterValue', name: 'Authorization', value: "Bearer ${JIRA_TOKEN}"],
+                                    [$class: 'StringParameterValue', name: 'Content-Type', value: 'application/json']
+                                ]
                         )
-                    }catch(e)
-                    {
-                        echo 'exption occured'
-                        echo e
+                    }catch{
+                        echo 'exeption occured'
                     }
                     echo "Status: ${response.status}"
                     echo "Response: ${response.content}"
