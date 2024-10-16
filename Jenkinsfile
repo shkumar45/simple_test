@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment{
-          JIRA_TOKEN = credentials('JIRA_TOKEN')
+        JIRA_TOKEN = credentials('JIRA_TOKEN')
     }
 
     stages {
