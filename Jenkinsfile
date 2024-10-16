@@ -52,7 +52,8 @@ pipeline {
                     response = httpRequest(
                         httpMode: 'POST',
                         url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
-                        contentType: 'APPLICATION_JSON',
+                        acceptType: 'APPLICATION_JSON',
+                        contentType: 'APPLICATION_FORM',
                         requestBody: req_payload
                     )
                     echo "Status: ${response.status}"
