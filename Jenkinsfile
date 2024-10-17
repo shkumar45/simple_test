@@ -41,19 +41,14 @@ pipeline {
                             },\
                             "tests" : [\
                                 {\
-                                    "testKey" : "XRAYT-2",\
+                                    "testKey" : "XRAYT-8",\
                                     "start" : "2024-08-30T11:47:35+01:00",\
                                     "finish" : "2024-08-30T11:50:56+01:00",\
                                     "comment" : "Successful execution",\
-                                    "status" : "PASS"\
+                                    "status" : "FAIL"\
                                 }\
                             ]\
                         }'
-
-                    //node {
-                        //echo "${JIRA_TOKEN}"
-                    //}
-                    //echo req_payload
                     response = httpRequest(
                         httpMode: 'POST',
                         url: 'http://localhost:8080/rest/raven/2.0/api/import/execution',
